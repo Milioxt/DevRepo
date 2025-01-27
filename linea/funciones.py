@@ -13,7 +13,7 @@ def main():
     b=3
     x=5
     y= Calcular_Y(x,m,b)
-    print(f'Para x={x}, y={y}')
+    #print(f'Para x={x}, y={y}')
 
 if __name__ == '__main__':
     main()

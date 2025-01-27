@@ -1,8 +1,15 @@
 import funciones
+import argparse
 
-def main():
-    m=2.0
-    b=3.0
+def main(m:float,b:float):
+    '''
+    Funcion principal que calcula las coordenadas de una linea recta
+    Recibimos m y b
+    Regresa: nada
+    '''
+    
+    #m=2.0
+    #b=3.0
     #X =[x for x in range(1,11)]
     #Y =[funciones.Calcular_Y(x,m,b) for x in X]
     #print('Enteros:')
@@ -15,4 +22,10 @@ def main():
     print(coordenadas_flotantes)
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-m',type=float,help='Pendiente de la linea', default=2.0)
+    parser.add_argument('-b',type=float,help='Ordenada en el origen', default=3.0)
+    args = parser.parse_args()
+    main(args.m,args.b)
+
+    #main(m=2.0,b=3.0)
