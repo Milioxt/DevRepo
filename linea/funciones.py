@@ -1,4 +1,4 @@
-def Calcular_Y(x,m,b):
+def Calcular_Y(x:float,m:float,b:float)->float:
     '''
     Calcula el valor de y en una linea recta
     x: valor de x
@@ -22,11 +22,11 @@ def test_linea():
     '''
     Prueba de funcionamiento de calcular_Y
     '''
-    y = Calcular_Y(0,2,3)
+    y = Calcular_Y(0.0,2.0,3.0)
     return y
 
 if __name__ == '__main__':
-    if test_linea() == 3:
+    if test_linea() == 3.0: 
         print('everything aight')
     else:
         print('sum went wrong')
