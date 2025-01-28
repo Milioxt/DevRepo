@@ -1,3 +1,5 @@
+#File with all the functions that app.py uses GYAAA
+import matplotlib.pyplot as plt
 def Calcular_Y(x:float,m:float,b:float)->float:
     '''
     Calcula el valor de y en una linea recta
@@ -14,6 +16,17 @@ def main():
     x=5
     y= Calcular_Y(x,m,b)
     #print(f'Para x={x}, y={y}')
+
+def grafica_linea(X:list,Y:list,m:float,b:float):
+    plt.plot(X,Y)
+    plt.title(f'Linea con pendiende {m} y ordenada al origen {b}')
+    plt.xlabel('X')
+    plt.ylabel('Y')
+    plt.show()
+
+
+
+
 
 if __name__ == '__main__':
     main()
