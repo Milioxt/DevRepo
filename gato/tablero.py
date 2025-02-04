@@ -12,20 +12,6 @@ def dibujar_tablero(simbolos:dict):
     {simbolos['7']} | {simbolos['8']} | {simbolos['9']}
     ''')
 
-def juego(simbolos:dict):
-    '''
-    Juego del gato
-    '''
-    lista_combinaciones = [
-        ['1'],['2'],['3'],
-        ['4'],['5'],['6'],
-        ['7'],['8'],['9'],
-        ['1'],['4'],['7'],
-        ['2'],['5'],['8'],
-        ['3'],['6'],['9'],
-        ['1'],['5'],['9'],
-        ['3'],['5'],['7']
-    ]
 
 
 
@@ -55,6 +41,47 @@ def usuario(simbolos:dict):
         else:
             print('Not a valid number')
 
+
+def juego(simbolos:dict):
+    '''
+    Juego del gato
+    '''
+    lista_combinaciones = [
+        ['1','2','3'],
+        ['4','5','6'],
+        ['7','8','9'],
+        ['1','4','7'],
+        ['2','5','8'],
+        ['3','6','9'],
+        ['1','5','9'],
+        ['3','5','7']
+    ]
+    en_juego = True
+    ganador = ""
+    movimientos = 0
+    dibujar_tablero(simbolos)
+    while en_juego:
+        if movimientos < 9 :
+            usuario(simbolos)
+            dibujar_tablero(simbolos)
+            movimientos += 1
+            gana = checa_winner(simbolos,lista_combinaciones)
+            if gana is True:
+                en_juego = False
+                ganador = "user"
+            ia(simbolos)
+            movimientos +=1
+            dibujar_tablero(simbolos)
+            gana = checa_winner(simbolos,lista_combinaciones)
+            if gana is True:
+                en_juego = False
+                ganador="Computer"
+            if movimientos >= 9:
+                en_juego = False
+        else:
+            en_juego = False
+
+
 def checa_winner(simbolos:dict, combinaciones:list):
     '''Checa si hay un ganador '''
     for c in combinaciones:
@@ -68,8 +95,11 @@ def checa_winner(simbolos:dict, combinaciones:list):
 if __name__ =='__main__':
     numeros = [str(x) for x in range(1,10)]
     dsimbolos = {x:x for x in numeros}
+    juego(dsimbolos)
+    '''
     dibujar_tablero(dsimbolos)
     ia(dsimbolos)
     dibujar_tablero(dsimbolos)
     usuario(dsimbolos)
     dibujar_tablero(dsimbolos)
+    '''
