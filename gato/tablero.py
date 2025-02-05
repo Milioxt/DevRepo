@@ -57,29 +57,31 @@ def juego(simbolos:dict):
         ['3','5','7']
     ]
     en_juego = True
-    ganador = ""
-    movimientos = 0
     dibujar_tablero(simbolos)
+    movimientos = 0
+    gana = None
     while en_juego:
-        if movimientos < 9 :
-            usuario(simbolos)
-            dibujar_tablero(simbolos)
-            movimientos += 1
-            gana = checa_winner(simbolos,lista_combinaciones)
-            if gana is True:
-                en_juego = False
-                ganador = "user"
-            ia(simbolos)
-            movimientos +=1
-            dibujar_tablero(simbolos)
-            gana = checa_winner(simbolos,lista_combinaciones)
-            if gana is True:
-                en_juego = False
-                ganador="Computer"
-            if movimientos >= 9:
-                en_juego = False
-        else:
+        usuario(simbolos)
+        dibujar_tablero(simbolos)
+        movimientos += 1
+        gana = checa_winner(simbolos,lista_combinaciones)
+        if gana is not None:
             en_juego = False
+            continue
+        if movimientos>=9:
+            en_juego = False
+            continue
+        ia(simbolos)
+        movimientos +=1
+        dibujar_tablero(simbolos)
+        gana = checa_winner(simbolos,lista_combinaciones)
+        if gana is not None:
+            en_juego = False
+            continue
+        if movimientos >= 9:
+            en_juego = False
+            continue
+    return gana
 
 
 def checa_winner(simbolos:dict, combinaciones:list):
@@ -95,7 +97,11 @@ def checa_winner(simbolos:dict, combinaciones:list):
 if __name__ =='__main__':
     numeros = [str(x) for x in range(1,10)]
     dsimbolos = {x:x for x in numeros}
-    juego(dsimbolos)
+    g = juego(dsimbolos)
+    if g is not None:
+        print(f'Winner is {g}')
+    else:
+        print('Tie')
     '''
     dibujar_tablero(dsimbolos)
     ia(dsimbolos)
