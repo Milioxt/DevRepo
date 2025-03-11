@@ -1,5 +1,4 @@
-'''Archivo con las funciones necesarias de la Aplicacion Libro web'''
-
+''' Archivo con las funciones necesarias de la Aplicacion libro_web '''
 import csv
 
 def leer_archivo_csv(archivo:str)->list:
@@ -7,11 +6,7 @@ def leer_archivo_csv(archivo:str)->list:
     with open(archivo, 'r', encoding='utf8') as file:
         return [x for x in csv.DictReader(file)]
 
-def crea_diccionario_titulos(lista:list)->dict:
-    ''' Funcion que crea un diccionario con los titulos de los libros como clave y el resto de los datos como valores'''
-    return {x['title']:x for x in lista}
-
-def crea_diccionario(lista:list, llave:str)->dict:
+def crea_diccionario_titulos(lista:list, llave: str)->dict:
     ''' Funcion que crea un diccionario con los titulos de los libros como clave y el resto de los datos como valores'''
     return {x[llave]:x for x in lista}
 
@@ -24,6 +19,14 @@ def busca_en_titulo(diccionario, palabra)-> list:
             lista.append(libro)
     return lista
 
+def crea_diccionario_autor(lista:list, llave:str)->dict:
+    ''' Funcion que crea un diccionario con los autores de los libros como clave y el resto de los datos como valores'''
+    return {x[llave]:x for x in lista}
+
+def crea_diccionario(lista:list, llave:str)->dict:
+    ''' Funcion que crea un diccionario con parametros que queramos'''
+    return {x[llave]:x for x in lista}
+
 def busca_en_diccionario(diccionario:dict, palabra:str)-> list:
     ''' Busca palabra en llave de la lista de diccionarios '''
     lista = []
@@ -33,13 +36,16 @@ def busca_en_diccionario(diccionario:dict, palabra:str)-> list:
             lista.append(libro)
     return lista
 
-
 if __name__ == '__main__':
     archivo_csv = 'booklist2000.csv'
     lista_libros = leer_archivo_csv(archivo_csv)
     diccionario_libros = crea_diccionario_titulos(lista_libros)
-    resultado = busca_en_diccionario(diccionario_libros, 'rebels')
+    resultado = busca_en_titulo(diccionario_libros, 'rebels')
+    print()
+    print("================ Busqueda por titulo =====================")
     print(resultado)
-    diccionario_autores = crea_diccionario(lista_libros,'author')
-    resultado = busca_en_diccionario(diccionario_autores, 'sandra')
+    diccionario_autores = crea_diccionario_autor(lista_libros, 'author')
+    resultado = busca_en_diccionario(diccionario_autores, 'Susan')
+    print()
+    print("================ Busqueda por autor ======================")
     print(resultado)
